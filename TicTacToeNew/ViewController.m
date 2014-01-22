@@ -18,12 +18,42 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self createButtons];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) createButtons{
+    char x = 0;
+    char xOffset = 100;
+    char y = 0;
+    char yOffset = 100;
+    char w = 100;
+    char h = 100;
+    for(y = 0; y < 3; y++){
+        for(x = 0; x < 3; x++){
+            bArr[y][x] = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            bArr[y][x].frame = CGRectMake(x*w+xOffset+x, y*h+yOffset+y, w, h);
+            bArr[y][x].backgroundColor = [UIColor lightGrayColor];
+            [bArr[y][x] setTitle:@"" forState:UIControlStateNormal];
+            [bArr[y][x] addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:bArr[y][x]];
+        }
+    }
+}
+
+- (void) buttonPressed: (id)sender{
+    UIButton* button = (UIButton*)sender;
+    
+    if([button currentTitle]){
+        
+    }
+    
+    [button setTitle:@"Yay" forState:UIControlStateNormal];
 }
 
 @end
