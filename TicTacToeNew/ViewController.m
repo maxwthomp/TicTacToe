@@ -61,5 +61,39 @@
         //[self checkForWin]
     }
 }
+-(IBAction) buttonReset{
+    char n;
+    for(n = 0;n<3;n++){
+        if([bArr[n][0] currentTitle]==[bArr[n][1] currentTitle] && [bArr[n][0] currentTitle]==[bArr[n][2] currentTitle] && ![[bArr[n][0] currentTitle] isEqualToString:@""]){
+            if([currentTurn isEqualToString:@"X"]){
+                turnLabel.text = [NSString stringWithFormat:@"O wins"];
+            }else{
+                turnLabel.text = [NSString stringWithFormat:@"X wins"];
+            }
+        }
+        if([bArr[0][n] currentTitle]==[bArr[1][n] currentTitle] && [bArr[0][n] currentTitle]==[bArr[2][n] currentTitle] && ![[bArr[0][n] currentTitle] isEqualToString:@""]){
+            if([currentTurn isEqualToString:@"X"]){
+                turnLabel.text = [NSString stringWithFormat:@"O wins"];
+            }else{
+                turnLabel.text = [NSString stringWithFormat:@"X wins"];
+            }
+        }
+    }
+    if([bArr[0][0] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][0] currentTitle]==[bArr[2][2] currentTitle] && ![[bArr[0][0] currentTitle] isEqualToString:@""]){
+        if([currentTurn isEqualToString:@"X"]){
+            turnLabel.text = [NSString stringWithFormat:@"O wins"];
+        }else{
+            turnLabel.text = [NSString stringWithFormat:@"X wins"];
+        }
+    }
+    if([bArr[0][2] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][2] currentTitle]==[bArr[2][0] currentTitle] && ![[bArr[0][2] currentTitle] isEqualToString:@""]){
+        if([currentTurn isEqualToString:@"X"]){
+            turnLabel.text = [NSString stringWithFormat:@"O wins"];
+        }else{
+            turnLabel.text = [NSString stringWithFormat:@"X wins"];
+        }
+    }
+}
+
 
 @end
