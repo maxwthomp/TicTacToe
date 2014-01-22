@@ -9,7 +9,6 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
@@ -18,6 +17,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    TURN_X = @"X";
+    TURN_O = @"O";
+    currentTurn = TURN_X;
     [self createButtons];
 }
 
@@ -27,12 +29,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (id) init{
-    self = [super init];
-    if(self){
-        currentTurn = TURN_X;
-    }
-    return self;
+- (void) createLabel{
+    /*turnLabel = [[UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];*/
 }
 
 - (void) createButtons{
@@ -60,6 +58,7 @@
     if([[button currentTitle] isEqualToString:@""]){
         [button setTitle:currentTurn forState:UIControlStateNormal];
         currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
+        //[self checkForWin]
     }
 }
 
