@@ -58,40 +58,32 @@
     if([[button currentTitle] isEqualToString:@""]){
         [button setTitle:currentTurn forState:UIControlStateNormal];
         currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
-        //[self checkForWin]
+        [self checkForWin];
     }
 }
--(IBAction) buttonReset{
+-(void) checkForWin{
     char n;
     for(n = 0;n<3;n++){
         if([bArr[n][0] currentTitle]==[bArr[n][1] currentTitle] && [bArr[n][0] currentTitle]==[bArr[n][2] currentTitle] && ![[bArr[n][0] currentTitle] isEqualToString:@""]){
-            if([currentTurn isEqualToString:@"X"]){
-                turnLabel.text = [NSString stringWithFormat:@"O wins"];
-            }else{
-                turnLabel.text = [NSString stringWithFormat:@"X wins"];
-            }
+            [self changeLabelForWin];
         }
         if([bArr[0][n] currentTitle]==[bArr[1][n] currentTitle] && [bArr[0][n] currentTitle]==[bArr[2][n] currentTitle] && ![[bArr[0][n] currentTitle] isEqualToString:@""]){
-            if([currentTurn isEqualToString:@"X"]){
-                turnLabel.text = [NSString stringWithFormat:@"O wins"];
-            }else{
-                turnLabel.text = [NSString stringWithFormat:@"X wins"];
-            }
+            [self changeLabelForWin];
         }
     }
     if([bArr[0][0] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][0] currentTitle]==[bArr[2][2] currentTitle] && ![[bArr[0][0] currentTitle] isEqualToString:@""]){
-        if([currentTurn isEqualToString:@"X"]){
-            turnLabel.text = [NSString stringWithFormat:@"O wins"];
-        }else{
-            turnLabel.text = [NSString stringWithFormat:@"X wins"];
-        }
+        [self changeLabelForWin];
     }
     if([bArr[0][2] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][2] currentTitle]==[bArr[2][0] currentTitle] && ![[bArr[0][2] currentTitle] isEqualToString:@""]){
-        if([currentTurn isEqualToString:@"X"]){
-            turnLabel.text = [NSString stringWithFormat:@"O wins"];
-        }else{
-            turnLabel.text = [NSString stringWithFormat:@"X wins"];
-        }
+        [self changeLabelForWin];
+    }
+}
+
+-(void) changeLabelForWin{
+    if([currentTurn isEqualToString:@"X"]){
+        turnLabel.text = [NSString stringWithFormat:@"O wins"];
+    }else{
+        turnLabel.text = [NSString stringWithFormat:@"X wins"];
     }
 }
 
