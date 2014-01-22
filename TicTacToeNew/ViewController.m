@@ -21,6 +21,7 @@
     TURN_O = @"O";
     currentTurn = TURN_X;
     [self createButtons];
+    [self createLabel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,7 +31,12 @@
 }
 
 - (void) createLabel{
-    /*turnLabel = [[UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];*/
+    turnLabel = [[UILabel alloc] initWithFrame:CGRectMake(400, 400, 200, 200)];
+    turnLabel.text = currentTurn;
+    turnLabel.font = [UIFont fontWithName:@"Airal" size:12];
+    turnLabel.numberOfLines = 1;
+    turnLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:turnLabel];
 }
 
 - (void) createButtons{
@@ -58,6 +64,7 @@
     if([[button currentTitle] isEqualToString:@""]){
         [button setTitle:currentTurn forState:UIControlStateNormal];
         currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
+        turnLabel.text = currentTurn;
         //[self checkForWin]
     }
 }
