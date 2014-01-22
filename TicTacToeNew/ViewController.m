@@ -27,6 +27,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (id) init{
+    self = [super init];
+    if(self){
+        currentTurn = TURN_X;
+    }
+    return self;
+}
+
 - (void) createButtons{
     char x = 0;
     char xOffset = 100;
@@ -49,11 +57,10 @@
 - (void) buttonPressed: (id)sender{
     UIButton* button = (UIButton*)sender;
     
-    if([button currentTitle]){
-        
+    if([[button currentTitle] isEqualToString:@""]){
+        [button setTitle:currentTurn forState:UIControlStateNormal];
+        currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
     }
-    
-    [button setTitle:@"Yay" forState:UIControlStateNormal];
 }
 
 @end

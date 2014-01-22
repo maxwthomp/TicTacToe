@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#define TURN_X (@"X")
+#define TURN_O (@"O")
+
 @interface ViewController : UIViewController{
     @private
         UIButton* bArr[3][3];
+        UILabel* turnLabel;
+        NSString* currentTurn;
 }
 
 @end
