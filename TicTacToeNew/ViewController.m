@@ -65,26 +65,18 @@
         [button setTitle:currentTurn forState:UIControlStateNormal];
         currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
         turnLabel.text = currentTurn;
-        [self checkWin];
+        [self checkForWin];
     }
 }
 //checks to see if there is a wi
 -(void) checkForWin{
-    char n;
+    char n, x, y, limit = 0;
     for(n = 0;n<3;n++){
         if([bArr[n][0] currentTitle]==[bArr[n][1] currentTitle] && [bArr[n][0] currentTitle]==[bArr[n][2] currentTitle] && ![[bArr[n][0] currentTitle] isEqualToString:@""]){
             [self changeLabelForWin];
         }
         if([bArr[0][n] currentTitle]==[bArr[1][n] currentTitle] && [bArr[0][n] currentTitle]==[bArr[2][n] currentTitle] && ![[bArr[0][n] currentTitle] isEqualToString:@""]){
             [self changeLabelForWin];
-        }
-        for(i = 0;i<3;i++){
-            if([[bArr[n][i] currentTitle] isEqualToString:@""]){
-                limit ++;
-                if(limit == 9){
-                    [self resetGame];
-                }
-            }
         }
     }
     if([bArr[0][0] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][0] currentTitle]==[bArr[2][2] currentTitle] && ![[bArr[0][0] currentTitle] isEqualToString:@""]){
@@ -93,13 +85,13 @@
     if([bArr[0][2] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][2] currentTitle]==[bArr[2][0] currentTitle] && ![[bArr[0][2] currentTitle] isEqualToString:@""]){
         [self changeLabelForWin];
     }
-    char x, y, limit = 0;
     for(x=0;x<3;x++){
         for(y=0;y<3;y++){
-            if(![[bArr[0][2] currentTitle] isEqualToString:@""]){
+            if(![[bArr[y][x] currentTitle] isEqualToString:@""]){
                 limit++;
                 if(limit==9){
-                    [self resetButtons];
+                    turnLabel.text = @"Tie";
+                    [self resetGame];
                 }
             }
         }
@@ -107,43 +99,8 @@
     
 }
 
-- (void) checkWin{
-    char x, y;
-    char tVal = 0;
-    char diag = 0;
-    char diag2 = 0;
-    bool winner = false;
-    for(y=0;y<3;y++){
-        char hVal = 0;
-        char vVal = 0;
-        for(x=0;x<3;x++){
-            hVal += [self turnToVal:[bArr[y][x] currentTitle]];
-            vVal += [self turnToVal:[bArr[x][y] currentTitle]];
-            tVal += abs([self turnToVal:[bArr[y][x] currentTitle]]);
-            if(abs(hVal) == 3 || abs(vVal) == 3){
-                turnLabel.text = @"hor/ver";
-                winner = true;
-            }
-            diag += [self turnToVal:[bArr[y][y] currentTitle]];
-            diag2 += [self turnToVal:[bArr[2-y][2-y] currentTitle]];
-        }
-    }
-    if(tVal == 9){
-        turnLabel.text = @"Tie!";
-    } else if(abs(diag) == 3 | abs(diag2) == 3){
-        turnLabel.text = @"Diag";
-        winner = true;
-    }
-    
-    if(winner) [self resetGame];
-    
-    
-}
-
-- (char) turnToVal: (NSString*)str{
-    if([str isEqualToString:TURN_X]) return 1;
-    else if([str isEqualToString:TURN_O]) return -1;
-    else return 0;
+- (char)checkWinRow:(char)r{
+    return ' ';
 }
 
 -(void) changeLabelForWin{
