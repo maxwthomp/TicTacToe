@@ -40,7 +40,7 @@
 }
 
 - (void) createButtons{
-    char x = 0;
+    char x = 100;
     char xOffset = 100;
     char y = 0;
     char yOffset = 100;
@@ -65,7 +65,7 @@
         [button setTitle:currentTurn forState:UIControlStateNormal];
         currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
         turnLabel.text = currentTurn;
-        //[self checkForWin]
+        [self checkForWin];
     }
 }
 -(void) checkForWin{
@@ -89,8 +89,21 @@
 -(void) changeLabelForWin{
     if([currentTurn isEqualToString:@"X"]){
         turnLabel.text = [NSString stringWithFormat:@"O wins"];
+        [self resetButtons];
     }else{
         turnLabel.text = [NSString stringWithFormat:@"X wins"];
+        [self resetButtons];
+    }
+    //Change to "turnLable.text = [NSString stringWithFormat"@"%s wins" currentTurn];" ?
+}
+
+- (void) resetButtons{
+    char x = 0;
+    char y = 0;
+    for(y = 0; y < 3; y++){
+        for(x = 0;x < 3; x++){
+            [bArr[y][x] setTitle:@"" forState:UIControlStateNormal];
+        }
     }
 }
 
