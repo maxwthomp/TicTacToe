@@ -13,6 +13,7 @@
 
 @implementation ViewController
 
+//Initlize v
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -86,18 +87,52 @@
     }
 }
 
+- (void) checkWin{
+    char x, y;
+    char tVal = 0;
+    char diag = 0;
+    char diag2 = 0;
+    for(y=0;y<3;y++){
+        char hVal = 0;
+        char vVal = 0;
+        for(x=0;x<3;x++){
+            hVal += [self turnToVal:[bArr[y][x] currentTitle]];
+            vVal += [self turnToVal:[bArr[x][y] currentTitle]];
+            tVal += abs(hVal);
+            if(abs(hVal) == 3 || abs(vVal) == 3){
+                [self changeLabelForWin];
+                return; //End
+            }
+            diag += [self turnToVal:[bArr[y][y] currentTitle]];
+            diag += [self turnToVal:[bArr[2-y][2-y] currentTitle]];
+        }
+    }
+    if(tVal == 9){
+        //Tie
+    } else if(diag == 3 | diag2 == 3){
+        //Diag
+    }
+    
+    
+}
+
+- (char) turnToVal: (NSString*)str{
+    if([str isEqualToString:TURN_X]) return 1;
+    else if([str isEqualToString:TURN_O]) return -1;
+    else return 0;
+}
+
 -(void) changeLabelForWin{
     if([currentTurn isEqualToString:@"X"]){
         turnLabel.text = [NSString stringWithFormat:@"O wins"];
-        [self resetButtons];
+        [self resetGame];
     }else{
         turnLabel.text = [NSString stringWithFormat:@"X wins"];
-        [self resetButtons];
+        [self resetGame];
     }
-    //Change to "turnLable.text = [NSString stringWithFormat"@"%s wins" currentTurn];" ?
 }
 
-- (void) resetButtons{
+- (void) resetGame{
     char x = 0;
     char y = 0;
     for(y = 0; y < 3; y++){
@@ -105,6 +140,7 @@
             [bArr[y][x] setTitle:@"" forState:UIControlStateNormal];
         }
     }
+    currentTurn = TURN_X;
 }
 
 
