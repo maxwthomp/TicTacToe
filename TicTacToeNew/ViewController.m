@@ -96,11 +96,6 @@
             }
         }
     }
-    
-}
-
-- (char)checkWinRow:(char)r{
-    return ' ';
 }
 
 -(void) changeLabelForWin{
