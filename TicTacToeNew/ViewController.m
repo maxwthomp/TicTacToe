@@ -71,8 +71,6 @@
 //checks to see if there is a wi
 -(void) checkForWin{
     char n;
-    char i;
-    char limit = 0;
     for(n = 0;n<3;n++){
         if([bArr[n][0] currentTitle]==[bArr[n][1] currentTitle] && [bArr[n][0] currentTitle]==[bArr[n][2] currentTitle] && ![[bArr[n][0] currentTitle] isEqualToString:@""]){
             [self changeLabelForWin];
@@ -95,6 +93,18 @@
     if([bArr[0][2] currentTitle]==[bArr[1][1] currentTitle] && [bArr[0][2] currentTitle]==[bArr[2][0] currentTitle] && ![[bArr[0][2] currentTitle] isEqualToString:@""]){
         [self changeLabelForWin];
     }
+    char x, y, limit = 0;
+    for(x=0;x<3;x++){
+        for(y=0;y<3;y++){
+            if(![[bArr[0][2] currentTitle] isEqualToString:@""]){
+                limit++;
+                if(limit==9){
+                    [self resetButtons];
+                }
+            }
+        }
+    }
+    
 }
 
 - (void) checkWin{
