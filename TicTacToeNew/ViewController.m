@@ -96,11 +96,10 @@
             }
         }
     }
-    
 }
 
 - (char)checkWinRow:(char)r{
-    return ' ';
+    return ' ';var WEAK_IMPORT_ATTRIBUTE
 }
 
 -(void) changeLabelForWin{
