@@ -12,6 +12,7 @@
 @end
 
 @implementation ViewController
+//intialize variables
 
 //Initlize v
 - (void)viewDidLoad
@@ -64,7 +65,7 @@
         [button setTitle:currentTurn forState:UIControlStateNormal];
         currentTurn = [currentTurn isEqualToString:TURN_X] ? TURN_O:TURN_X;
         turnLabel.text = currentTurn;
-        [self checkForWin];
+        [self checkWin];
     }
 }
 //checks to see if there is a wi
@@ -83,7 +84,7 @@
             if([[bArr[n][i] currentTitle] isEqualToString:@""]){
                 limit ++;
                 if(limit == 9){
-                    [self resetButtons];
+                    [self resetGame];
                 }
             }
         }
@@ -101,26 +102,30 @@
     char tVal = 0;
     char diag = 0;
     char diag2 = 0;
+    bool winner = false;
     for(y=0;y<3;y++){
         char hVal = 0;
         char vVal = 0;
         for(x=0;x<3;x++){
             hVal += [self turnToVal:[bArr[y][x] currentTitle]];
             vVal += [self turnToVal:[bArr[x][y] currentTitle]];
-            tVal += abs(hVal);
+            tVal += abs([self turnToVal:[bArr[y][x] currentTitle]]);
             if(abs(hVal) == 3 || abs(vVal) == 3){
-                [self changeLabelForWin];
-                return; //End
+                turnLabel.text = @"hor/ver";
+                winner = true;
             }
             diag += [self turnToVal:[bArr[y][y] currentTitle]];
-            diag += [self turnToVal:[bArr[2-y][2-y] currentTitle]];
+            diag2 += [self turnToVal:[bArr[2-y][2-y] currentTitle]];
         }
     }
     if(tVal == 9){
-        //Tie
-    } else if(diag == 3 | diag2 == 3){
-        //Diag
+        turnLabel.text = @"Tie!";
+    } else if(abs(diag) == 3 | abs(diag2) == 3){
+        turnLabel.text = @"Diag";
+        winner = true;
     }
+    
+    if(winner) [self resetGame];
     
     
 }
